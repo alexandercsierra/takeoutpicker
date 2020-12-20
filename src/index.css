@@ -11,3 +11,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+/* 
+input[type='checkbox'] {
+  -webkit-appearance:none;
+  width:1.2rem;
+  height:1.2rem;
+  background-image: "url('https://lh3.googleusercontent.com/proxy/pz2fUgNOF6h8wQzGxnlZT8Z05GQuRDA_hBRT65VvikSqXzLgTy5h6vpq43OtESxr3Hjpqf8QuadNismKIrpGUazsjRqiC7mhDXEOj6MovQg7MAuypoKBjSr-w07Tfy-j9Y9Swsh0urR0_486AX6i')";
+  border-radius:5px;
+  border:2px solid #555;
+}
+input[type='checkbox']:checked {
+  background: green;
+} */

@@ -5,10 +5,14 @@ export const places = [
   },
   {
     name: "The Governor",
-    type: "diner",
+    type: "diners",
   },
   {
     name: "Firehouse",
     type: "subs",
+  },
+  {
+    name: "Jason's Pizza",
+    type: "pizza",
   },
 ];

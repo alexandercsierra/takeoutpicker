@@ -1,22 +1,46 @@
 import React, { useState, useEffect } from "react";
 import { places } from "../util";
+import styled from 'styled-components';
+import FoodGenre from './FoodGenre'
 
 const RestOptions = ({ placesList, setPlacesList, setIsDisabled }) => {
+
+
   const [options, setOptions] = useState({
-    subs: true,
-    diner: true,
-    burgers: true,
-  });
+    subs: {
+      name: 'subs',
+      emoji: '🥪',
+      status: true
+    },
+    diners: {
+      name: 'diners',
+      emoji: '☕',
+      status: true
+    },
+    burgers: {
+      name: 'burgers',
+      emoji: '🍔',
+      status: true
+    },
+    pizza: {
+      name: 'pizza',
+      emoji: '🍕',
+      status: true
+    },
+});
 
   const handleChange = (e) => {
-    setOptions({
-      ...options,
-      [e.target.name]: !options[e.target.name],
-    });
+   setOptions({
+     ...options,
+     [e.target.name]: {
+       ...options[e.target.name],
+       status: !options[e.target.name].status
+     }
+   })
   };
 
   const handleClick = (type) => {
-    if (options[type]) {
+    if (options[type].status) {
       const filteredList = placesList.filter((place) => place.type !== type);
       setPlacesList(filteredList);
     } else {
@@ -26,47 +50,34 @@ const RestOptions = ({ placesList, setPlacesList, setIsDisabled }) => {
   };
 
   useEffect(() => {
-    const optVals = Object.values(options);
-    if (!optVals.includes(true)) {
-      setIsDisabled(true);
-    } else {
-      setIsDisabled(false);
+    const vals = Object.values(options).filter(opts=>{
+      return opts.status === true
+    })
+    if(vals.length > 0){
+      setIsDisabled(false)
+    } else{
+      setIsDisabled(true)
     }
   }, [options]);
 
+  const labelStyle = {display:"flex", flexDirection: "column", justifyContent:'center', alignItems:'center', fontSize: '1.5rem'}
+
   return (
     <div>
-      <form>
-        <label htmlFor="subs">Subs</label>
-        <input
-          id="subs"
-          onClick={() => handleClick("subs")}
-          type="checkbox"
-          name="subs"
-          checked={options.subs}
-          onChange={handleChange}
-        />
-        <label htmlFor="diner">Diners</label>
-        <input
-          id="diner"
-          onClick={() => handleClick("diner")}
-          type="checkbox"
-          name="diner"
-          checked={options.diner}
-          onChange={handleChange}
-        />
-        <label htmlFor="burgers">Burgers</label>
-        <input
-          id="burgers"
-          onClick={() => handleClick("burgers")}
-          type="checkbox"
-          name="burgers"
-          checked={options.burgers}
-          onChange={handleChange}
-        />
-      </form>
+      <Form>
+        {Object.values(options).map(opt => <FoodGenre genre={{name:opt.name, emoji: opt.emoji}} options={options} handleChange={handleChange} handleClick={handleClick}/>)}
+      </Form>
     </div>
   );
 };
 
 export default RestOptions;
+
+const Form = styled.form`
+  display: flex;
+  // flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+
