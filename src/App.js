@@ -1,25 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import styled from "styled-components";
+import Restaurant from "./components/Restaurant";
+import RandomButton from "./components/RandomButton";
+import { places } from "./util";
+import RestOptions from "./components/RestOptions";
 
-function App() {
+const App = () => {
+  const [placesList, setPlacesList] = useState(places);
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [currentRest, setCurrentRest] = useState({
+    name: "",
+    type: "",
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Title>DoorDash Decider</Title>
+      <Container>
+        <RestOptions
+          placesList={placesList}
+          setPlacesList={setPlacesList}
+          setIsDisabled={setIsDisabled}
+        />
+        <RandomButton
+          setCurrentRest={setCurrentRest}
+          placesList={placesList}
+          isDisabled={isDisabled}
+        />
+      </Container>
+      <Restaurant name={currentRest.name} type={currentRest.type} />
     </div>
   );
-}
+};
 
 export default App;
+
+const Title = styled.h1`
+  color: blue;
+  font-size: 2rem;
+  text-align: center;
+`;
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
