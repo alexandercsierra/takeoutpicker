@@ -37,24 +37,27 @@ const RestOptions = ({ placesList, setPlacesList, setIsDisabled }) => {
   return (
     <div>
       <form>
-        <label>Subs</label>
+        <label htmlFor="subs">Subs</label>
         <input
+          id="subs"
           onClick={() => handleClick("subs")}
           type="checkbox"
           name="subs"
           checked={options.subs}
           onChange={handleChange}
         />
-        <label>Diners</label>
+        <label htmlFor="diner">Diners</label>
         <input
+          id="diner"
           onClick={() => handleClick("diner")}
           type="checkbox"
           name="diner"
           checked={options.diner}
           onChange={handleChange}
         />
-        <label>Burgers</label>
+        <label htmlFor="burgers">Burgers</label>
         <input
+          id="burgers"
           onClick={() => handleClick("burgers")}
           type="checkbox"
           name="burgers"
